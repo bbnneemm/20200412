@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- 以上代码告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。 -->
+    <script src="js/flexible.js"></script>
+    <link rel="stylesheet" href="css/index.css" rel="external nofollow" />
+    <link rel="stylesheet" href="css/initialize.css" rel="external nofollow" />
+    <script src="js/vue2.6.11.js"></script>
+    <titleTodolist</title>
+</head>
+<body>
+    <div class="wrap" id="wrap">
+        <div class="title">Todo</div>
+        <div class="add">
+            <input type="text" id="input-add" v-model="newinput"  >
+             <div class="button" @click="addTodo()">添加任务</div>     
+        </div>
+        <div class="change">
+            <ul>
+                <li>全部任务</li>
+            <li>已完成任务</li>
+            <li id="li3">未完成任务</li></ul>
+        </div>
+        <div class="content">
+            <div class="data">
+                <ul>
+                    <li  class="content_todoList"
+                    v-for="(list,index) in todoLists"  >
+                      <input type="checkbox" class="checkbox" v-model="list.isChecked" @click="finish(index)">{{list.value}}
+                      <span @click="deleteTodo(index)">X</span>
+                   </li>  
+                    
+                </ul>
+            </div>
+            <div class="data">
+                <ul>
+                    <li  class="content_todoList" v-if="list.isChecked==true"
+                    v-for="(list,index) in todoLists" >
+                    <input type="checkbox" class="checkbox" v-model="list.isChecked" @click="finish(index)">{{list.value}}
+                    <span @click="deleteTodo(index)">X</span>
+                   </li>  
+                </ul>
+            </div>
+            <div class="data" id="data3">
+                <ul>
+                    <li  class="content_todoList" v-if="list.isChecked==false"
+                    v-for="(list,index) in todoLists" >
+                       {{list.value}}<span @click="deleteTodo(index)">X</span>
+                   </li>  
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+ let vm=new Vue({
+      el: "#wrap",
+      data: {
+        newinput:"",
+        todoLists: [],
+       
+      },
+      methods: {
+        addTodo(){
+            if (this.newinput === "") {return}
+            var json={
+                "value": this.newinput, 
+                isChecked: false 
+               };
+               this.todoLists.push(json);
+             this.newinput="";
+        //    window.localStorage.setItem("content",JSON.stringify(this.todoLists))
+           console.log(this.todoLists);
+        },
+        deleteTodo(index) { 
+        this.todoLists.splice(index, 1)
+        // window.localStorage.setItem("content",JSON.stringify(todoLists))
+},    
+    finish(index){
+        this.todoLists[index].isChecked=!this.todoLists[index].isChecked;
+    }
+
+
+
+
+      }
+    })
+</script>
+</html>

@@ -1,0 +1,18 @@
+a:link {}/* 未访问的链接 */
+a:visited {}/* 已访问的链接 */
+a:hover {}/* 鼠标移动到链接上 */
+a:active {}/* 选定的链接 */
+del,ins,a{text-decoration:none;}
+a:hover,a:active,a:focus{ text-decoration:none;} /* 取消a标签点击后的虚线框 */
+a,input,button,ul,li{
+    width:100%;  height: 100%;
+    box-sizing: border-box;
+}
+input{
+    padding-left: .266667rem;
+    border:#c2c2c2 2px solid;
+}
+ul li{
+    list-style: none;
+}
+input:focus{outline:none;}
